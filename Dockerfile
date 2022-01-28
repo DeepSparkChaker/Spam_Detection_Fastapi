@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 
 RUN pip install --upgrade pip
 
@@ -8,6 +8,6 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 8000
 
 CMD ["python", "main.py"]

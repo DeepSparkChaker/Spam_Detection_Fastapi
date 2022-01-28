@@ -4,9 +4,12 @@ import joblib
 import uvicorn
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
 from pydantic import BaseModel
+from sklearn.neural_network import MLPClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
 # import nest_asyncio
-from utils.pipeline import *
+#from utils.pipeline import *
 from utils.preparation import *
+import re
 
 # from typing import Any, Dict,List,Enum
 # import numpy as np  
@@ -26,29 +29,20 @@ from utils.preparation import *
 ## ----------------------------------------------------------------
 
 app = FastAPI(
-    title="Fraud Detection API",
-    description="A simple API that use Ml model to predict fraud ",
+    title="Spam Detection API",
+    description="A simple API that use Ml model to predict Spam ",
     version="0.1",
 )
 
 
 # Creating the data model for data validation
 class ClientData(BaseModel):
-    step: List[int]
-    type: List[str]
-    amount: List[float]
-    nameOrig: List[str]
-    oldbalanceOrig: List[float]
-    newbalanceOrig: List[float]
-    nameDest: List[str]
-    oldbalanceDest: List[float]
-    newbalanceDest: List[float]
-
+    message: str
 
 # Load  the model  a serialized .joblib file
 #joblib_filename = "models/pipeline_model_lgbm_final.joblib"
 #model = joblib.load(joblib_filename)
-with open('models/pipeline_model_lgbm_final_local.joblib', 'rb') as joblib_filename:
+with open('models/spam_classifier.joblib', 'rb') as joblib_filename:
     model = joblib.load(joblib_filename)
    
 
@@ -74,41 +68,30 @@ def ping():
 
 
 # Defining the prediction endpoint without data validation
-@app.post('/basic_predict_raw')
+@app.post('/basic_predict_spam')
 async def basic_predict(request: Request):
     '''
-  This route don't validate data .
-  '''
+    This is a first docstring.
+    '''
     # Getting the JSON from the body of the request
-    input_data = await request.json()
-
-    # Converting JSON to Pandas DataFrame
-    input_df = pd.DataFrame([input_data])
-
-    # Getting the prediction
-    pred = model.predict(input_df)[0]
-
-    return pred
+    messsage = await request.json()
+    return classify_message(model, message)
 
 
 # We now define the function that will be executed for each URL request and return the value:
-@app.post("/predict-fraud")
-async def predict_fraud(item: ClientData):
+@app.post("/predict-spam")
+async  def predict_fraud(item :ClientData):
     """
-  A simple function that receive a client data and predict Fraud.
-  :param client_data:
-  :return: prediction, probabilities
-  
-  """
+    A simple function that receive a client data and predict Spam.
+    :param client_data:
+    :return: prediction, probabilities
+    """
     # perform prediction
-    # df =pd.DataFrame([item])
-    h = item.dict()
-    df = pd.DataFrame.from_dict(h, orient="columns")
-    prediction = model.predict(df)
-    prediction_final = ["Fraud" if (x > 0.5) else "Not Fraud" for x in prediction]
-    return prediction_final
+    #df =pd.DataFrame([item])
+    #h=item.dict()
+    return classify_message(model, str(item))
 	
-# Create the POST endpoint with path '/predict'
+# Create the POST endpoint with path '/predict_csv'
 @app.post("/predict_csv")
 async def create_upload_file(file: UploadFile = File(...)):
     # Handle the file only if it is a CSV
@@ -130,5 +113,5 @@ async def create_upload_file(file: UploadFile = File(...)):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 # uvicorn app:app --reload

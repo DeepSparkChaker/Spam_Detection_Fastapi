@@ -105,9 +105,12 @@ The process of building around our model and deploying it has become easier and 
 # Reference:
 end to end Ml :
 https://neptune.ai/blog/how-to-monitor-your-models-in-production-guide
+
 https://pythonawesome.com/a-complete-end-to-end-machine-learning-portal-that-covers-processes-starting-from-model-training-to-the-model-predicting-results-using-fastapi/
 
 https://medium.com/analytics-vidhya/fundamentals-of-mlops-part-4-tracking-with-mlflow-deployment-with-fastapi-61614115436
+
+
 
 Ml Monitoring : 
 https://neptune.ai/blog/how-to-monitor-your-models-in-production-guide
