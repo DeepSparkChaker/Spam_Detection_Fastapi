@@ -110,9 +110,19 @@ https://pythonawesome.com/a-complete-end-to-end-machine-learning-portal-that-cov
 
 https://medium.com/analytics-vidhya/fundamentals-of-mlops-part-4-tracking-with-mlflow-deployment-with-fastapi-61614115436
 
+https://testdriven.io/blog/fastapi-machine-learning/
 
+# Streamlit+fastapi : 
+https://testdriven.io/blog/fastapi-streamlit/
 
-Ml Monitoring : 
+https://github.com/davidefiocco/streamlit-fastapi-model-serving
+
+https://testdriven.io/blog/fastapi-streamlit/
+
+https://www.analyticsvidhya.com/blog/2021/11/laptop-price-prediction-practical-understanding-of-machine-learning-project-lifecycle/
+
+# Ml Monitoring : 
+
 https://neptune.ai/blog/how-to-monitor-your-models-in-production-guide
 https://neptune.ai/blog/best-ml-experiment-tracking-tools
 
@@ -132,6 +142,17 @@ https://www.freecodecamp.org/news/how-to-deploy-an-nlp-model-with-fastapi/
 https://github.com/kaustubhgupta/FastAPI-KivyMD-App-Demo
 
 https://www.analyticsvidhya.com/blog/2021/06/deploying-ml-models-as-api-using-fastapi-and-heroku/
+
+# Deploy time series prophet :
+https://github.com/testdrivenio/fastapi-ml
+
+# Back +Front FastAPI : 
+https://github.com/Deffro/random-dose-of-knowledge
+
+https://github.com/yxlee245/app-iris-ml-react-fastapi
+
+# Deploy bert sentiment Analysis : 
+https://ledatascientist.com/deployer-rapidement-des-modeles-de-ml-avec-fastapi/
 
 
 
